@@ -1,0 +1,14 @@
+The data in data/ and figs/data/, the trained models (*.model, *.pt) and the
+equilibrium configurations (colab/step6_results/*.npz) are licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+Copyright (c) 2026 Xiyao Yu
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided that you give appropriate credit, provide a link to the
+licence, and indicate if changes were made.
+
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The program code (*.py, *.ipynb and the inputs in dft/) is licensed separately
+under the MIT Licence; see LICENSE.

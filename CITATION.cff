@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: If you use this software or data, please cite both the paper and this archive.
+title: "Certifying the kinetics of machine-learned interatomic potentials from single-point energies: code and data"
+authors:
+  - family-names: Yu
+    given-names: Xiyao
+    email: xyu029@e.ntu.edu.sg
+    affiliation: "School of Chemistry, Chemical Engineering and Biotechnology, Nanyang Technological University"
+license: MIT
+license-url: "https://opensource.org/licenses/MIT"
+repository-code: "https://github.com/PillowSoprano/mlip-kinetics-certificate"
+version: "1.0.0"
+references:
+  - type: article
+    title: "Certifying the Kinetics of Machine-Learned Interatomic Potentials from Single-Point Energies"
+    authors:
+      - family-names: Yu
+        given-names: Xiyao
+    year: 2026

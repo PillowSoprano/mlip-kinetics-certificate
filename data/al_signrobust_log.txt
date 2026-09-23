@@ -1,0 +1,18 @@
+
+block = 6 kT, 16 seeds, |ln(k_hat/k)|
+   strategy      median q2  q4    q8    q12  | mean q12 | worst q12 | seeds with q12 error > 0.5
+   unc             1.94  1.82  0.68  0.15 |    0.39  |     1.64  | 4 / 16
+   cert            0.22  0.27  0.05  0.05 |    0.17  |     1.73  | 1 / 16
+   cert_sym        0.13  0.28  0.05  0.05 |    0.05  |     0.15  | 0 / 16
+   cert_max        0.35  0.30  0.04  0.06 |    0.21  |     1.53  | 2 / 16
+   cert_symmax     0.23  0.17  0.15  0.09 |    0.24  |     1.64  | 2 / 16
+   plain cert failures vs ensemble sign bias at the blocked saddle: failing seeds have frac(negative members) = [0.88]; others median 0.38
+
+block = 12 kT, 16 seeds, |ln(k_hat/k)|
+   strategy      median q2  q4    q8    q12  | mean q12 | worst q12 | seeds with q12 error > 0.5
+   unc             1.87  0.78  0.31  0.20 |    0.23  |     0.59  | 1 / 16
+   cert            0.31  0.33  0.08  0.06 |    0.18  |     1.80  | 1 / 16
+   cert_sym        0.21  0.36  0.08  0.03 |    0.05  |     0.11  | 0 / 16
+   cert_max        0.40  0.23  0.09  0.07 |    0.11  |     0.37  | 0 / 16
+   cert_symmax     0.33  0.21  0.14  0.09 |    0.21  |     1.22  | 2 / 16
+   plain cert failures vs ensemble sign bias at the blocked saddle: failing seeds have frac(negative members) = [0.88]; others median 0.50

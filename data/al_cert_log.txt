@@ -1,0 +1,16 @@
+
+block = 6 kT   median |ln(k_hat/k)| over 6 seeds, imperfect ensemble uncertainty (K=8)
+   strategy    q0    q1    q2    q3    q4    q6    q8    q12   | worst seed at q12
+   unc         1.85  1.83  1.84  1.83  1.86  0.84  0.70  0.15 | 1.09
+   lev         1.85  0.57  0.25  0.29  0.40  0.47  0.48  0.58 | 0.65
+   cert        1.85  0.99  0.73  0.19  0.29  0.24  0.07  0.04 | 1.73
+   cert_orc    1.85  0.29  0.08  0.06  0.05  0.04  0.03  0.02 | 0.04
+   certificate validity along the cert_orc runs: actual <= certified in 99% of (seed, round) pairs; median certified/actual = 1.3
+
+block = 12 kT   median |ln(k_hat/k)| over 6 seeds, imperfect ensemble uncertainty (K=8)
+   strategy    q0    q1    q2    q3    q4    q6    q8    q12   | worst seed at q12
+   unc         2.02  2.02  2.01  1.79  1.10  0.91  0.27  0.14 | 0.28
+   lev         2.02  1.48  0.12  0.11  0.27  0.41  0.42  0.57 | 0.64
+   cert        2.02  1.50  0.90  0.67  0.28  0.25  0.08  0.08 | 1.80
+   cert_orc    2.02  1.45  0.11  0.06  0.05  0.03  0.01  0.01 | 0.02
+   certificate validity along the cert_orc runs: actual <= certified in 100% of (seed, round) pairs; median certified/actual = 1.7

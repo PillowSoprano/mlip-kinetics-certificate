@@ -1,0 +1,9 @@
+quantity,value
+lambda_true,-0.025079850757425602
+lambda_model,-0.003747456025775831
+lower_channel_mass_levE_md,0.45208555426572605
+lower_channel_mass_unc_md,0.01180408253807425
+lower_channel_mass_lev_md,0.7220941846630194
+lower_channel_mass_unc_free,0.3207489941727411
+lower_channel_mass_lev_free,0.9156065704390312
+lower_channel_mass_lev_true_md,0.9844446522568011
