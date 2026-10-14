@@ -52,8 +52,8 @@ def bracket(n, w):
     lnG = g.mean() - np.log(np.exp(-(g - g.mean())).mean())
     return (lnG - np.log((w * np.exp(d - d.mean())).sum()) - d.mean(),
             lnG + np.log((w * np.exp(-(d - d.mean()))).sum()) - d.mean())
-def wts(F):
-    nu = np.exp(F) * occ; nu /= nu.sum()
+def wts(F):                                                           # a bin carries the mass of nu; its frames are averaged
+    nu = np.exp(F) * (occ > 0); nu /= nu.sum()
     w = np.where(nsamp[ib] > 0, nu[ib] / np.maximum(nsamp[ib], 1), 0); return w / w.sum()
 
 y, sy = map(np.array, zip(*[lr(n) for n in SIX]))

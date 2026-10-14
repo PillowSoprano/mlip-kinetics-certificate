@@ -20,7 +20,7 @@ The tree is the one the scripts expect, so every program here runs unmodified fr
 | `research_extensions/` | nonlinear response and corrected trial fields (`response_geometry*.py`); force errors weighted by the response flux (`work_weighted/`) |
 | `dft/` | density-functional single points: inputs, energies (`E0`, extrapolated to zero smearing), magnetic moments and structures of the hop-path and equilibrium frames of the teacher; `excluded_fused_pairs.txt` lists the hop frames with a fused lithium pair, which were not computed |
 | `data/` | analysis outputs, including the predictions computed from reference data (`*_predicted*`, `li3ocl_pred_*`) |
-| `figs/` | `fig1_overview.py`, which computes and draws Figure 1, and `data/`, the numerical values behind every other figure |
+| `figs/` | `fig1_overview.py`, which computes and draws Figure 1; `structures.py`, which selects and projects the configurations of Figures 4a,b and 5a,b; `dft_panel_data.py`, which computes Figure 5d; and `data/`, the numerical values behind every figure |
 
 ## Figures
 
@@ -32,9 +32,9 @@ numbering. This table is the correspondence.
 | 1 | where force error and rate weight an energy error; the measurement; two seeds of one force error | computed by `figs/fig1_overview.py` | `figs/fig1_overview.py`, with `tube_bounds.py` and `twochannel_blindspot.py` |
 | 2 | force error and rate error of the Li<sub>3</sub>OCl and alanine-dipeptide models | `fig_hook_li.csv`, `fig_hook_ala.csv` | `transition_count_bound.py`, `li3ocl/students_table.py`, `ala2/measure_students.py` |
 | 3 | alanine dipeptide: equilibrium density, reactive dissipation density, designed errors | `fig8_nu_pts.csv`, `fig5_ala2.csv` | `ala2/path_ala2.py`, `ala2/analyze.py` |
-| 4 | alanine dipeptide, neural-network students | `fig10_students*.csv` | `ala2/series_weights_check.py`, `ala2/measure_students.py` |
-| 5 | Li<sub>3</sub>OCl intervals and the teacher against density-functional theory | `fig15_bracket.csv`, `fig13_hist_*.csv` | `li3ocl/equilibrium_coordinate.py`, `dV_profile.py`, `clean_channel.py`, `bracket_vs_rate.py`, `teacher_vs_dft.py` |
-| 6 | acquisition for alanine dipeptide | `fig11_*.csv` | `ala2/active_learning.py`, `al_two_sided.py`, `measure_AL.py` |
+| 4 | alanine dipeptide, neural-network students: a teacher frame and a twisted student frame; estimates from teacher paths and from the students' own paths against measured rates | `struct_frames_ala.npz`, `fig10_students_slow.csv`, `fig10_students_fast.csv`, `fig_model_paths_ala_*.csv` | `figs/structures.py`, `ala2/series_weights_check.py`, `ala2/model_side_all.py`, `ala2/measure_students.py` |
+| 5 | Li<sub>3</sub>OCl: a single-vacancy hop and the defect state; estimates against measured hop rates; the teacher against DFT | `struct_frames_li.npz`, `fig15_bracket.csv`, `fig_model_paths_li_*.csv`, `fig_dft_kde.csv`, `fig_dft_points_*.csv` | `figs/structures.py`, `figs/dft_panel_data.py`, `li3ocl/bracket_vs_rate.py`, `student_paths.py`, `teacher_vs_dft.py` |
+| 6 | acquisition for alanine dipeptide | `fig11_*.csv` | `ala2/active_learning.py`, `al_two_sided.py`, `al_two_committee.py`, `measure_AL.py`, `measure_twoc.py` |
 | S1 | condition number of a rate, and predictors | `fig3_condition.csv`, `fig3_scatter.csv` | `doublewell_check.py` |
 | S2 | local saddle data do not determine the rate | `fig14_*.csv` | `matched_saddle.py`, `matched_saddle_2d.py` |
 | S3 | flow coordinates, series and parallel laws | `fig9_slice_cells.csv`, `fig9_tube_cells.csv` | `tube_bounds.py`, `path_bound.py` |
@@ -45,16 +45,25 @@ numbering. This table is the correspondence.
 
 ## Tables
 
+All tables are in the Supporting Information.
+
 | table | subject | data | code |
 |---|---|---|---|
-| 1 | alanine dipeptide, designed errors | `data/ala2_stage1_g1.csv`, `_g10.csv`, `_g50.csv` | `ala2/analyze.py` |
-| 2 | alanine dipeptide, neural-network students | `data/ala2_students_series_weights.csv` (predictions), `ala2_students_measured_all.csv`, `ala2_students_channel_decomposition.csv`, `ala2_students_model_side.csv` | `ala2/series_weights_check.py`, `measure_students.py`, `predict_model_side.py` |
-| 3, S4 | Li<sub>3</sub>OCl models | `data/li3ocl_students_1000K.csv` | `li3ocl/students_table.py` |
 | S1 | grid convergence of the nonlinear response | | `research_extensions/response_geometry_continuum.py` |
-| S3 | frame weights for the alanine students | `data/ala2_students_series_weights.csv` | `ala2/series_weights_check.py` |
-| S5 | kinetic loss | `data/kinetic_loss_scan_exact.csv` | `kinetic_loss_scan.py` |
+| S2 | one- and two-dimensional model systems | | |
+| S3 | alanine dipeptide, designed errors | `data/ala2_stage1_g1.csv`, `_g10.csv`, `_g50.csv` | `ala2/analyze.py` |
+| S4 | alanine dipeptide, neural-network students | `data/ala2_students_series_weights.csv` (teacher paths), `ala2_students_model_side_all.csv` (student paths), `ala2_students_measured_all.csv`, `ala2_students_channel_decomposition.csv` | `ala2/series_weights_check.py`, `model_side_all.py`, `measure_students.py` |
+| S5 | alanine students, estimates from their own paths | `data/ala2_students_model_side_all.csv` | `ala2/model_side_all.py` |
+| S6 | frame weights for the alanine students | `data/ala2_students_series_weights.csv` | `ala2/series_weights_check.py` |
+| S7 | Li<sub>3</sub>OCl models, transport mechanisms | `data/li3ocl_students_1000K.csv`, `li3ocl_defect_states.csv` | `li3ocl/students_table.py`, `defect_states.py`, `bracket_vs_rate.py` |
+| S8 | Li<sub>3</sub>OCl students, estimates from their own paths | `data/li3ocl_student_paths_1000K.csv` | `li3ocl/student_paths.py` |
+| S9 | Li<sub>3</sub>OCl models, including the two retrained ones | `data/li3ocl_students_1000K.csv` | `li3ocl/students_table.py`, `bracket_vs_rate.py` |
+| S10 | kinetic loss | `data/kinetic_loss_scan_exact.csv` | `kinetic_loss_scan.py` |
 
-The numbers of Supporting Information Section S22 are in `research_extensions/work_weighted/results/`,
+The split of the teacher's contrast against DFT into the contributions of distillation and of MACE-MP-0
+(Supporting Information, Section S21) is computed by `li3ocl/mp0_vs_dft.py` and stored in `data/li3ocl_mp0_vs_dft.csv`;
+the acquisition control of Section S22 is in `data/ala2_AL_twoc_measured.csv`.
+The numbers of Supporting Information Section S23 are in `research_extensions/work_weighted/results/`,
 written by `flux_checks.py` and `concentration_counterexample.py` in that directory. Other numbers quoted in the
 text come from the scripts of the corresponding figures and sections.
 
@@ -78,9 +87,9 @@ cd li3ocl && python bracket_vs_rate.py
 ```
 
 run against `data/` with no simulation at all. The scripts that need raw trajectories or stored hop frames are
-`ala2/series_weights_check.py` and, in `li3ocl/`, `analyze_hops.py`, `defect_states.py`, `clean_channel.py`,
-`dV_profile.py`, `student_side.py`, `select_two_sided.py`, `lattice_integrity.py` and `students_table.py`;
-regenerate the trajectories with the notebooks in `colab/` first.
+`ala2/series_weights_check.py`, `ala2/model_side_all.py`, `ala2/measure_twoc.py` and, in `li3ocl/`, `analyze_hops.py`, `defect_states.py`, `clean_channel.py`,
+`dV_profile.py`, `student_side.py`, `student_paths.py`, `select_two_sided.py`, `lattice_integrity.py` and `students_table.py`;
+regenerate the trajectories with the notebooks in `colab/` first. `li3ocl/mp0_vs_dft.py` needs mace-torch, which fetches MACE-MP-0 (small) on first use; `figs/structures.py` redraws Figures 4a,b and 5a,b from the stored frames in `figs/data/`.
 
 ## Licence
 

@@ -1,0 +1,4 @@
+alanine teacher frame at phi~0: |omega1| = 171 deg (median of teacher frames 171)
+alanine student A2 frame at phi~0: |omega1| = 76 deg (median of distorted frames 76; 73% of A2 frames at phi~0 have |omega1|<120)
+Li3OCl hop frame 59470: hopping ion 1.43 A from the nearest site; closest Li-Li 2.14 A
+Li3OCl fused frame 45157: Li-Li 0.50 A on site 76; empty sites at 5.55, 7.34 A from it
